@@ -4,7 +4,7 @@ let route = express.Router();
 
 route.get("/",getTasks);
 route.post("/",createTask);
-route.put("/",updateTask);
-route.delete("/",deleteTask);
+route.put("/:id",updateTask);
+route.delete("/:id",deleteTask);
 
 module.exports = route;
