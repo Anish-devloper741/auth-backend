@@ -1,21 +1,27 @@
 require("dotenv").config();
 let express = require('express');
-const  userRoute  = require('./routes/userRoute');
+const userRoute = require('./routes/userRoute');
 let mongoose = require("mongoose");
 const TasksRoute = require("./routes/tasksRoute");
+
 let app = express();
 app.use(express.json());
-app.use("/users",userRoute);
-app.use("/tasks",TasksRoute);
 
+// Yeh ek test route hai, taaki check kar sako ki Vercel server chal raha hai
+app.get("/", (req, res) => {
+    res.send("Backend is working perfectly on Vercel!");
+});
+
+app.use("/users", userRoute);
+app.use("/tasks", TasksRoute);
+
+// Hardcoded string hata di, ab yeh dashboard wale MONGO_URI ko automatic pick karega
 mongoose.connect(process.env.MONGO_URI)
-.then(()=>{
+.then(() => {
     console.log("Server is connected");
-// app.listen(5000,()=>{
-//     console.log(`http://localhost:5000`);
-    
-// })
 })
-.catch((err)=>{
-    console.log(err);
-})
+.catch((err) => {
+    console.log("MongoDB connection Error: ", err);
+});
+
+module.exports = app;
