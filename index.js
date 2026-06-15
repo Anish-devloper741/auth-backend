@@ -11,10 +11,10 @@ app.use("/tasks",TasksRoute);
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>{
     console.log("Server is connected");
-app.listen(5000,()=>{
-    console.log(`http://localhost:5000`);
+// app.listen(5000,()=>{
+//     console.log(`http://localhost:5000`);
     
-})
+// })
 })
 .catch((err)=>{
     console.log(err);
